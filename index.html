@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title>Reaper Keys</title>
     <link rel='stylesheet' href='https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'>
+
 
     <link rel='stylesheet' href='https://g.sawczak.com/web-tools/css/app-base.css'>
-    <link rel='stylesheet' href='https://g.sawczak.com/web-tools/css/jquery-ui-options.css'>
+
     <link rel="stylesheet" href="./style.css">
 
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
@@ -27,48 +27,102 @@
         <div id='gamePanel' class='panel flexRow hideScrollbar'>
             <div id="controlPanel">
                 <h1>Controls</h1>
+                <div class="controlWrap flexRowCenter" id="controlsResetAllWrap">
+                    <button class="buttonBase buttonEffects controlButton" id="btnResetAll" title="Reset to initial values">
+                        <i class="fa-solid fa-rotate"></i></button>
+                </div>
                 <div id="controls" class="flexCol">
                     <div class="controlWrap flexCol">
-                        <label for="inputWScale">Horizontal scale
+                        <label for="inputWScale">Horizontal scale %
                         </label>
-                        <input type="number" min="0.1" max="10.0" step="0.1" value="1" id="inputWScale"
-                               class="controlInput">
+                        <div class="controlInputWrap flexRow">
+                            <input type="number" min="10" max="1000" step="1" value="100" id="inputWScale"
+                                   class="controlInput">
+                            <button class="buttonBase buttonEffects controlButton controlResetButton" id="btnResetWScale"
+                                    title="Reset to initial value"
+                                    data-target="inputWScale" data-value="1"><i class="fa-solid fa-rotate"></i></button>
+                        </div>
                     </div>
                     <div class="controlWrap flexCol">
-                        <label for="inputHScale">Vertical scale
+                        <label for="inputHScale">Vertical scale %
                         </label>
-                        <input type="number" min="0.1" max="10.0" step="0.1" value="1" id="inputHScale"
-                               class="controlInput">
+                        <div class="controlInputWrap flexRow">
+                            <input type="number" min="10" max="1000" step="1" value="100" id="inputHScale"
+                                   class="controlInput">
+                            <button class="buttonBase buttonEffects controlResetButton" id="btnResetHScale" title="Reset to initial value"
+                                    data-target="inputHScale" data-value="1"><i class="fa-solid fa-rotate"></i></button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="controlWrap flexCol">
+                        <label for="inputHWhite">White key height
+                        </label>
+                        <div class="controlInputWrap flexRow">
+                            <input type="number" min="3" max="31" step="1" value="25" id="inputHWhite"
+                                   class="controlInput">
+                            <button class="buttonBase buttonEffects controlResetButton" id="btnResetHWhite" title="Reset to initial value"
+                                    data-target="inputHWhite" data-value="25"><i class="fa-solid fa-rotate"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="controlWrap flexCol">
-                        <label for="inputWScale">White key height
+                        <label for="inputHBlack">Black key height
                         </label>
-                        <input type="number" min="3" max="31" step="1" value="25" id="inputHWhite"
-                               class="controlInput">
+                        <div class="controlInputWrap flexRow">
+                            <input type="number" min="3" max="31" step="1" value="15" id="inputHBlack"
+                                   class="controlInput">
+                            <button class="buttonBase buttonEffects controlResetButton" id="btnResetHBlack" title="Reset to initial value"
+                                    data-target="inputHBlack" data-value="15"><i class="fa-solid fa-rotate"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="controlWrap flexCol">
+                        <label for="inputWWhiteFactor" title="White key width scale">White key width %
+                        </label>
+                        <div class="controlInputWrap flexRow">
+                            <input type="number" min="25" max="200" step="1" value="100" id="inputWWhiteFactor"
+                                   class="controlInput">
+                            <button class="buttonBase buttonEffects controlResetButton" id="btnResetWWhiteFactor" title="Reset to initial value"
+                                    data-target="inputWBlackFactor" data-value="57"><i class="fa-solid fa-rotate"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="controlWrap flexCol">
-                        <label for="inputWScale">Black key height
+                        <label for="inputWBlackFactor" title="Black key width as % of white key width">Black key width %
                         </label>
-                        <input type="number" min="3" max="31" step="1" value="15" id="inputHBlack"
-                               class="controlInput">
+                        <div class="controlInputWrap flexRow">
+                            <input type="number" min="5" max="95" step="1" value="57" id="inputWBlackFactor"
+                                   class="controlInput">
+                            <button class="buttonBase buttonEffects controlResetButton" id="btnResetWBlackFactor" title="Reset to initial value"
+                                    data-target="inputWBlackFactor" data-value="57"><i class="fa-solid fa-rotate"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="controlWrap flexCol">
+                        <label for="inputBlackAB" title="The proportion of the black key that overlaps on the B key">Black
+                            overlap % A/B
+                        </label>
+                        <div class="controlInputWrap flexRow">
+                            <input type="number" min="50" max="98" step="1" value="70" id="inputBlackAB"
+                                   class="controlInput">
+                            <button class="buttonBase buttonEffects controlResetButton" id="btnResetBlackAB" title="Reset to initial value"
+                                    data-target="inputBlackAB" data-value="70"><i class="fa-solid fa-rotate"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="controlWrap flexCol">
-                        <label for="inputWScale" title="Black key width as % of white key width">Black key width %
+                        <label for="inputBlackDE" title="The proportion of the black key that overlaps on the E key">Black
+                            overlap % D/E
                         </label>
-                        <input type="number" min="5" max="95" step="1" value="57" id="inputWBlackFactor"
-                               class="controlInput">
-                    </div>
-                    <div class="controlWrap flexCol">
-                        <label for="inputBlackAB" title="The proportion of the black key that overlaps on the B key">Black overlap % A/B
-                        </label>
-                        <input type="number" min="50" max="98" step="1" value="70" id="inputBlackAB"
-                               class="controlInput">
-                    </div>
-                    <div class="controlWrap flexCol">
-                        <label for="inputBlackDE" title="The proportion of the black key that overlaps on the E key">Black overlap % D/E
-                        </label>
-                        <input type="number" min="50" max="98" step="1" value="60" id="inputBlackDE"
-                               class="controlInput">
+                        <div class="controlInputWrap flexRow">
+                            <input type="number" min="50" max="98" step="1" value="60" id="inputBlackDE"
+                                   class="controlInput">
+                            <button class="buttonBase buttonEffects controlResetButton" id="btnResetBlackDE" title="Reset to initial value"
+                                    data-target="inputBlackDE" data-value="60"><i class="fa-solid fa-rotate"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -92,10 +146,11 @@
     </div>
 </div>
 <!-- partial -->
+
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
-<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
+<script src="https://kit.fontawesome.com/f8cd0a77d9.js" crossorigin="anonymous"></script>
 <script src='https://g.sawczak.com/web-tools/js/toolbox.js'></script>
-<script src='https://g.sawczak.com/web-tools/js/jquery-ui-options.js'></script>
+
 <script src="./js-canvas.js"></script>
 <script src="./settings.js"></script>
 <script src="./script.js"></script>

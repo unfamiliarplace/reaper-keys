@@ -141,7 +141,8 @@ const draw_row_black = (s, i) => {
  * @param s
  * @param i
  */
-const draw_beat = (s, i) => {}
+const draw_beat = (s, i) => {
+}
 
 /**
  * Draw the ith beat division line on the given surface.
@@ -251,12 +252,14 @@ const deriveParameters = () => {
     let ws = JSON.parse(JSON.stringify(defaultWidths));
 
     // Update from inputs
-    s.W_SCALE = parseFloat($('#inputWScale').val());
-    s.H_SCALE = parseFloat($('#inputHScale').val());
+    s.W_SCALE = parseFloat($('#inputWScale').val()) / 100;
+    s.H_SCALE = parseFloat($('#inputHScale').val()) / 100;
     hs.H_WHITE = parseFloat($('#inputHWhite').val());
     hs.H_BLACK = parseFloat($('#inputHBlack').val());
-    ws.W_BLACK_FACTOR = parseInt($('#inputWBlackFactor').val());
-    ws.W_BLACK = ws.W_WHITE * (ws.W_BLACK_FACTOR / 100);
+    ws.W_WHITE_FACTOR = parseInt($('#inputWWhiteFactor').val()) / 100;
+    ws.W_WHITE = ws.W_WHITE * (ws.W_WHITE_FACTOR);
+    ws.W_BLACK_FACTOR = parseInt($('#inputWBlackFactor').val()) / 100;
+    ws.W_BLACK = ws.W_WHITE * (ws.W_BLACK_FACTOR);
 
     let ab = parseInt($('#inputBlackAB').val());
     let de = parseInt($('#inputBlackDE').val());
@@ -266,11 +269,11 @@ const deriveParameters = () => {
     s.W_SCALE_FACTOR = $(document).width() / s.W_DOCUMENT_BASE;
     s.H_SCALE_FACTOR = $(document).height() / s.H_DOCUMENT_BASE;
 
-    Object.keys(ws).forEach(function(k, i) {
+    Object.keys(ws).forEach(function (k, i) {
         ws[k] *= s.W_SCALE * s.W_SCALE_FACTOR;
     });
 
-    Object.keys(hs).forEach(function(k, i) {
+    Object.keys(hs).forEach(function (k, i) {
         hs[k] *= s.H_SCALE * s.H_SCALE_FACTOR;
     });
 
@@ -294,7 +297,6 @@ const deriveParameters = () => {
 
     return s;
 }
-
 
 /**
  * Reset the canvas and its variables.
@@ -330,10 +332,49 @@ const draw = () => {
 }
 
 /**
+ * Reset all the controls.
+ */
+const handleResetAllInputs = () => {
+    $('.controlResetButton').each((i, el) => {
+        resetInput(el, true)
+    });
+    draw();
+}
+
+/**
+ * Reset an individual control.
+ * @param btn
+ * @param silent If supplied and true, the canvas is not redrawn.
+ */
+const resetInput = (btn, silent) => {
+    btn = $(btn); // lol
+    let idInput = btn.attr('data-target');
+    let value = btn.attr('data-value');
+
+    $(`#${idInput}`).val(value);
+
+    if (!silent) {
+        draw();
+    }
+}
+
+
+/**
+ * Handle a reset individual control button click.
+ * @param e
+ */
+const handleResetInput = (e) => {
+    let btn = $(e.currentTarget).get(0);
+    resetInput(btn);
+}
+
+/**
  * Bind the controls.
  */
 const bind = () => {
     $('.controlInput').change(draw);
+    $('.controlResetButton').click(handleResetInput);
+    $('#btnResetAll').click(handleResetAllInputs);
 }
 
 /**

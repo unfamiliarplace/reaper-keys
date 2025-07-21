@@ -18,7 +18,7 @@ body {
 }
 
 #controlPanel {
-    width: 17%;
+    width: 15%;
     padding: 0 10px;
 }
 
@@ -28,7 +28,7 @@ body {
 
 #canvasKeysWrap {
     width: 100%;
-    height: 100%;
+    height: 99%;
     /*background: #000;*/
 }
 
@@ -37,15 +37,41 @@ body {
 }
 
 #controls {
-    width: 85%;
     gap: 25px;
 }
 
 .controlWrap label {
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
 .controlInput {
     font-size: 20px;
     text-align: center;
+    width: 90%;
+    background: none;
+    color: var(--text-color);
+    border: 1px solid var(--text-color);
+    padding: 5px;
+    height: 35px;
 }
+
+.controlInputWrap {
+    gap: 5px;
+    justify-content: space-between;
+}
+
+.controlResetButton {
+    width: 35px;
+    height: 35px;
+}
+
+#btnResetAll {
+    width: 60px;
+    height: 60px;
+    font-size: 30px;
+}
+
+#controlsResetAllWrap {
+    margin-bottom: 25px;
+}
+
