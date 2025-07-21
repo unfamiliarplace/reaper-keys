@@ -241,12 +241,64 @@ const draw_octave_div = (s, i) => {
 /* Main */
 
 /**
+ * Update the parameters based on the inputs and the derived/calculated values
+ * @returns {*}
+ */
+const deriveParameters = () => {
+    // Copy parameters
+    let s = JSON.parse(JSON.stringify(defaultBasics));
+    let hs = JSON.parse(JSON.stringify(defaultHeights));
+    let ws = JSON.parse(JSON.stringify(defaultWidths));
+
+    // Update from inputs
+    s.W_SCALE = parseFloat($('#inputWScale').val());
+    s.H_SCALE = parseFloat($('#inputHScale').val());
+    hs.H_WHITE = parseFloat($('#inputHWhite').val());
+    hs.H_BLACK = parseFloat($('#inputHBlack').val());
+
+    let ab = parseInt($('#inputBlackAB').val());
+    let de = parseInt($('#inputBlackDE').val());
+    s.YO_BLACK = [ab, 50, 100 - ab, null, de, 100 - de, null];
+
+    // Scale everything
+    s.W_SCALE_FACTOR = $(document).width() / s.W_DOCUMENT_BASE;
+    s.H_SCALE_FACTOR = $(document).height() / s.H_DOCUMENT_BASE;
+
+    Object.keys(ws).forEach(function(k, i) {
+        ws[k] *= s.W_SCALE * s.W_SCALE_FACTOR;
+    });
+
+    Object.keys(hs).forEach(function(k, i) {
+        hs[k] *= s.H_SCALE * s.H_SCALE_FACTOR;
+    });
+
+    s = {...s, ...ws, ...hs};
+
+    // Derive convenience parameters
+    s.W_R_BARS = s.W_R_BAR_1 + s.W_R_BAR_2
+    s.W_BARS = s.W_L_BAR + s.W_R_BARS
+    s.W_KEY = s.W_WHITE
+    s.W_STATIC = s.W_BARS + s.W_KEY
+    s.W_MEASURE = ((s.N_BEATS_PER_MEASURE * (s.W_BEAT + s.W_BEAT_DIV)) - s.W_BEAT_DIV);
+    s.H_OCTAVE = ((7 * (s.H_WHITE + s.H_WHITE_DIV)) - s.H_WHITE_DIV);
+    // s.W = (s.W_L_BAR + s.W_WHITE + s.W_R_BAR_1 + s.W_R_BAR_2 + ((s.N_MEASURES * (s.W_MEASURE + s.W_MEASURE_DIV)) - s.W_MEASURE_DIV));
+    // s.H = (s.N_OCTAVES * (s.H_OCTAVE + s.H_OCTAVE_DIV)) - s.H_OCTAVE_DIV;
+
+    // N of octaves and measures to give impression of infinity
+    s.W = w;
+    s.H = h;
+    s.N_OCTAVES = (s.H / s.H_OCTAVE) + 1
+    s.N_MEASURES = ((s.W - s.W_STATIC) / s.W_MEASURE) + 1
+
+    return s;
+}
+
+
+/**
  * Reset the canvas and its variables.
  */
 const reset = () => {
     let wrap = $('#canvasKeysWrap');
-    let w = wrap.width();
-    let h = wrap.height();
     let el = `<canvas id="canvasKeys" width="${w}px" height="${h}px"></canvas>`;
 
     wrap.empty();
@@ -286,16 +338,25 @@ const bind = () => {
  * Initialize the app.
  */
 const initialize = () => {
+    let wrap = $('#canvasKeysWrap');
+    w = wrap.width();
+    h = wrap.height();
     draw();
     bind();
 }
 
 /**
- * Actual on load stuff.
+ * Globals
  */
 let canvas;
 let ctx;
 let sub;
 let p; // Parameters
 const c = colours; // Convenience
+let w; // Canvas space width
+let h; // Canvas space height
+
+/**
+ * Go!
+ */
 $(document).ready(initialize);

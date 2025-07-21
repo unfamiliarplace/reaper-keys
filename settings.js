@@ -3,8 +3,11 @@ const defaultBasics = {
     N_MEASURES: 3,
     N_OCTAVES: 3,
 
-    W_SCALE_FACTOR: 2,
-    H_SCALE_FACTOR: 2.65,
+    W_DOCUMENT_BASE: 1080,
+    H_DOCUMENT_BASE: 640,
+
+    W_SCALE_FACTOR: 1,
+    H_SCALE_FACTOR: 1,
     W_SCALE: 1,
     H_SCALE: 1,
 
@@ -48,36 +51,4 @@ const colours = {
     BEAT_DIV_WHITE: '3d3d3d',
     MEASURE_DIV_WHITE: '383838',
     MEASURE_DIV_BLACK: '313131',
-}
-
-const deriveParameters = () => {
-    // Copy parameters and update from inputs
-    let s = JSON.parse(JSON.stringify(defaultBasics));
-    s.W_SCALE = parseFloat($('#inputWScale').val());
-    s.H_SCALE = parseFloat($('#inputHScale').val());
-
-    let hs = JSON.parse(JSON.stringify(defaultHeights));
-    hs.H_WHITE = parseFloat($('#inputHWhite').val());
-    hs.H_BLACK = parseFloat($('#inputHBlack').val());
-
-    let ws = JSON.parse(JSON.stringify(defaultWidths));
-
-    // Scale everything
-    Object.keys(ws).forEach(function(k, i) {
-        ws[k] *= s.W_SCALE * s.W_SCALE_FACTOR;
-    });
-
-    Object.keys(hs).forEach(function(k, i) {
-        hs[k] *= s.H_SCALE * s.H_SCALE_FACTOR;
-    });
-
-    s = {...s, ...ws, ...hs};
-
-    // Derive convenience parameters
-    s.W_MEASURE = ((s.N_BEATS_PER_MEASURE * (s.W_BEAT + s.W_BEAT_DIV)) - s.W_BEAT_DIV);
-    s.H_OCTAVE = ((7 * (s.H_WHITE + s.H_WHITE_DIV)) - s.H_WHITE_DIV);
-    s.W = (s.W_L_BAR + s.W_WHITE + s.W_R_BAR_1 + s.W_R_BAR_2 + ((s.N_MEASURES * (s.W_MEASURE + s.W_MEASURE_DIV)) - s.W_MEASURE_DIV));
-    s.H = (s.N_OCTAVES * (s.H_OCTAVE + s.H_OCTAVE_DIV)) - s.H_OCTAVE_DIV;
-
-    return s;
 }
