@@ -31,3 +31,21 @@ body {
     height: 100%;
     /*background: #000;*/
 }
+
+#controlPanel h1 {
+    margin-bottom: 25px;
+}
+
+#controls {
+    width: 85%;
+    gap: 25px;
+}
+
+.controlWrap label {
+    margin-bottom: 5px;
+}
+
+.controlInput {
+    font-size: 20px;
+    text-align: center;
+}
