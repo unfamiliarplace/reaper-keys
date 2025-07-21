@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reaper Keys</title>
+    <link rel='stylesheet' href='https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'>
+
+    <link rel='stylesheet' href='https://g.sawczak.com/web-tools/css/app-base.css'>
+    <link rel='stylesheet' href='https://g.sawczak.com/web-tools/css/jquery-ui-options.css'>
+    <link rel="stylesheet" href="./style.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id='app' class='flexCol'>
+    <div id='dropzoneContainer'></div>
+    <div id='header'>
+        <h1 id='title'>Reaper Keys</h1>
+    </div>
+    <div id='main'>
+        <div id='gamePanel' class='panel flexRow hideScrollbar'>
+            <div id="controlPanel">
+                Controls
+            </div>
+            <div id='focusPanel' class="flexRow">
+                <div id="canvasKeysWrap" class="flexCol">
+                    <canvas id="canvasKeys" width="1200px" height="800px"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id='footer'>
+        <div id='footerContent'>
+            <div class='footerBlock' id='footerLeft'>
+            </div>
+            <div class='footerBlock' id='footerRight'>
+                <div id="copyrightContainer">
+                    <div id="copyright">© <span id="copyrightYear">2025</span> <a href="https://sawczak.com">Luke
+                        Sawczak</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- partial -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
+<script src='https://g.sawczak.com/web-tools/js/toolbox.js'></script>
+<script src='https://g.sawczak.com/web-tools/js/jquery-ui-options.js'></script>
+<script src="./js-canvas.js"></script>
+<script src="./settings.js"></script>
+<script src="./script.js"></script>
+
+</body>
+</html>

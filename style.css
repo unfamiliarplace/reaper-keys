@@ -1,0 +1,33 @@
+/* General */
+
+body {
+    --bg-color: #340f3c;
+    --text-color: #fff;
+}
+
+#app {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* General */
+
+#gamePanel {
+    justify-content: space-between;
+}
+
+#controlPanel {
+    width: 17%;
+    padding: 0 10px;
+}
+
+#focusPanel {
+    width: 84%;
+}
+
+#canvasKeysWrap {
+    width: 100%;
+    height: 100%;
+    /*background: #000;*/
+}
