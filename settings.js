@@ -20,6 +20,7 @@ const defaultWidths = {
     W_R_BAR_2: 1,
     W_WHITE: 191,
     W_BLACK: 109,
+    W_BLACK_FACTOR: 57,
     W_BEAT: 10,
     W_BEAT_DIV: 1,
     W_MEASURE_DIV: 1

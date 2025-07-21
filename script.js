@@ -255,6 +255,8 @@ const deriveParameters = () => {
     s.H_SCALE = parseFloat($('#inputHScale').val());
     hs.H_WHITE = parseFloat($('#inputHWhite').val());
     hs.H_BLACK = parseFloat($('#inputHBlack').val());
+    ws.W_BLACK_FACTOR = parseInt($('#inputWBlackFactor').val());
+    ws.W_BLACK = ws.W_WHITE * (ws.W_BLACK_FACTOR / 100);
 
     let ab = parseInt($('#inputBlackAB').val());
     let de = parseInt($('#inputBlackDE').val());
